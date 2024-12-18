@@ -1,0 +1,114 @@
+﻿﻿@using E_commerce_project.ViewModels;
+@model LoginVM
+@{
+    ViewData["Title"] = "Login";
+}
+
+
+<!-- Background Section -->
+<div class="background-container">
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="col-md-4 col-lg-3 card shadow-sm p-4">
+            <h2 class="text-center text-black mb-4">Login</h2>
+            <form asp-action="Login" method="post" asp-route-returnurl="@ViewData["ReturnUrl"]">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <!-- Username Field -->
+                <div class="mb-3">
+                    <label asp-for="Username" class="form-label text-black">Username</label>
+                    <input asp-for="Username" class="form-control" placeholder="Enter Username" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+
+                <!-- Password Field -->
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label text-black">Password</label>
+                    <input asp-for="Password" class="form-control" type="password" placeholder="Enter Password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <!-- Remember Me Checkbox -->
+                <div class="mb-3 form-check">
+                    <label class="form-check-label text-black">
+                        <input asp-for="RememberMe" class="form-check-input" /> @Html.DisplayNameFor(a => a.RememberMe)
+                    </label>
+                </div>
+
+                <!-- Action Links and Submit Button -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <a asp-action="Register" class="text-decoration-none text-black" asp-route-returnurl="@ViewData["ReturnUrl"]">Don't have an account?</a>
+                    <button type="submit" class="btn btn-danger w-50">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<style>
+    /* Background Styling with Image */
+    .background-container {
+        background-image: url('/images/6.jpg'); /* Replace with your image path */
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Card Styling */
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+        background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background for the card */
+        padding: 60px;
+    }
+
+        .card .form-control {
+            border-radius: 8px;
+        }
+
+        .card .btn-primary {
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .card .form-label {
+            font-weight: bold;
+            color: #333;
+        }
+
+    .form-check-label {
+        font-size: 0.9rem;
+    }
+
+    .btn-primary {
+        font-size: 1rem;
+    }
+
+    .text-info {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    /* Layout Adjustments */
+    .container {
+        max-width: 100%;
+    }
+
+    .min-vh-100 {
+        min-height: 100vh;
+    }
+
+    .mb-3 {
+        margin-bottom: 1.5rem;
+    }
+
+</style>

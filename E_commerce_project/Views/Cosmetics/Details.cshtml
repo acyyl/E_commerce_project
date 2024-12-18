@@ -1,0 +1,179 @@
+﻿@model E_commerce_project.Models.CosmeticProduct
+
+<!-- Wrapper with a soft pink theme -->
+<div class="soft-pink-theme">
+    <div class="container mt-5">
+        <div class="card shadow-lg border-0">
+            <div class="row g-0 align-items-center">
+                <!-- Product Image Section -->
+                <div class="col-md-6">
+                    <img src="@Model.ImageUrl"
+                         alt="@Model.Name"
+                         class="img-fluid rounded-start"
+                         style="max-height: 400px; object-fit: contain; width: 100%;">
+                </div>
+
+                <!-- Product Details Section -->
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <h1 class="card-title text-pink">@Model.Name</h1>
+                        <p class="card-text">
+                            <strong class="text-muted">Price:</strong>
+                            <span class="text-success">$@Model.Price</span>
+                        </p>
+                        <p class="card-text">
+                            <strong class="text-muted">Description:</strong> @Model.Description
+                        </p>
+                        <p class="card-text">
+                            <strong class="text-muted">Category:</strong> @Model.Category
+                        </p>
+                        <p class="card-text">
+                            <strong class="text-muted">Popularity:</strong>
+                            <span class="stars">
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    if (i <= Model.Popularity)
+                                    {
+                                        <span class="text-warning">★</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-secondary">☆</span>
+                                    }
+                                }
+                            </span>
+                        </p>
+                        <a href="@Url.Action("Index", "Cosmetics")" class="btn btn-outline-pink mt-3">
+                            Back to Products
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="product-faq mt-5">
+    <h3 class="text-center text-pink mb-4">Frequently Asked Questions</h3>
+    <div class="accordion" id="faqAccordion">
+        <!-- Question 1 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="faqHeading1">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse1" aria-expanded="true" aria-controls="faqCollapse1">
+                    Is this product cruelty-free?
+                </button>
+            </h2>
+            <div id="faqCollapse1" class="accordion-collapse collapse show" aria-labelledby="faqHeading1">
+                <div class="accordion-body">
+                    Yes, this product is completely cruelty-free and not tested on animals.
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="faqHeading2">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse2" aria-expanded="false" aria-controls="faqCollapse2">
+                    Can I use this product daily?
+                </button>
+            </h2>
+            <div id="faqCollapse2" class="accordion-collapse collapse" aria-labelledby="faqHeading2">
+                <div class="accordion-body">
+                    Yes, it’s designed for everyday use and is safe for all skin types.
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="faqHeading3">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse3" aria-expanded="false" aria-controls="faqCollapse3">
+                    How do I store this product?
+                </button>
+            </h2>
+            <div id="faqCollapse3" class="accordion-collapse collapse" aria-labelledby="faqHeading3">
+                <div class="accordion-body">
+                    Store it in a cool, dry place away from direct sunlight for best results.
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="faqHeading4">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse4" aria-expanded="false" aria-controls="faqCollapse4">
+                    Is it suitable for sensitive skin?
+                </button>
+            </h2>
+            <div id="faqCollapse4" class="accordion-collapse collapse" aria-labelledby="faqHeading4">
+                <div class="accordion-body">
+                    Yes, this product is formulated to be gentle and is suitable for sensitive skin.
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="faqHeading5">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse5" aria-expanded="false" aria-controls="faqCollapse5">
+                    Does this product contain parabens or sulfates?
+                </button>
+            </h2>
+            <div id="faqCollapse5" class="accordion-collapse collapse" aria-labelledby="faqHeading5">
+                <div class="accordion-body">
+                    No, this product is free from parabens, sulfates, and other harmful chemicals.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- CSS Styles -->
+<style>
+    /* Soft pink background */
+    .soft-pink-theme {
+        background-color: #fde8f1; /* Very soft pink */
+        padding: 30px 0;
+        min-height: 100vh;
+    }
+
+    /* Card styling */
+    .card {
+        background-color: #fffafc; /* Light pinkish white for contrast */
+        border-radius: 12px;
+        padding: 20px;
+    }
+
+    /* Pink theme typography */
+    .text-pink {
+        color: #d685ad; /* Soft muted pink */
+        font-weight: bold;
+    }
+
+    .text-muted {
+        color: #b07b8d; /* Subtle muted color for labels */
+    }
+
+    /* Button styling */
+    .btn-outline-pink {
+        color: #d685ad;
+        border: 1px solid #d685ad;
+    }
+
+        .btn-outline-pink:hover {
+            background-color: #d685ad;
+            color: white;
+        }
+
+    /* Stars for popularity */
+    .stars .text-warning {
+        color: #ffc107; /* Gold star */
+    }
+
+    .stars .text-secondary {
+        color: #d6d6d6; /* Gray star */
+    }
+</style>

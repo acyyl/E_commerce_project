@@ -1,0 +1,131 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<!-- Hero Section -->
+<div class="hero-section">
+    <div class="hero-images">
+        <img src="/images/b.jpg" alt="Hero Image" class="hero-image">
+        <img src="/images/8.jpg" alt="Hero Image" class="hero-image">
+        <img src="/images/1.jpg" alt="Hero Image" class="hero-image">
+        <img src="/images/9.jpg" alt="Hero Image" class="hero-image">
+        <img src="/images/a.jpg" alt="Hero Image" class="hero-image">
+    </div>
+    <div class="hero-overlay">
+        <h1 class="display-4" style="font-weight: bold;">Natural Beauty</h1>
+        <p class="lead" style="font-size: 1.5rem;">Healthy Solutions for Your Beauty Skin</p>
+        <a class="btn btn-light btn-lg" href="@Url.Action("Login", "Account")" role="button">Shop Now</a>
+    </div>
+</div>
+
+<!-- Show message if available -->
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-warning text-center mt-4">
+        @TempData["Message"]
+    </div>
+}
+
+<!-- Featured Sections -->
+<div class="container mt-5">
+    <div class="row">
+        <!-- Featured Products -->
+        <div class="col-md-4">
+            <h3>Featured Products</h3>
+            <p>Discover our handpicked selection of best-sellers, available at incredible prices!</p>
+        </div>
+
+        <!-- About Us -->
+        <div class="col-md-4">
+            <h3>About Us</h3>
+            <p>At our store, we're committed to bringing you high-quality products with great customer service. Learn more about our mission and values.</p>
+            <a href="@Url.Action("About", "Home")" class="btn btn-outline-primary">Learn More</a>
+        </div>
+
+        <!-- Contact Us -->
+        <div class="col-md-4">
+            <h3>Contact</h3>
+            <p>If you have any questions or need assistance, we're here to help. Feel free to <a href="@Url.Action("Contact", "Home")">contact us</a>.</p>
+            <a href="@Url.Action("Contact", "Home")" class="btn btn-outline-primary">Get in Touch</a>
+        </div>
+    </div>
+</div>
+
+<!-- CSS -->
+<style>
+    .hero-section {
+        position: relative;
+        text-align: center;
+        color: white;
+        width: 100%;
+        height: 60vh;
+        overflow: hidden;
+    }
+
+    .hero-images {
+        position: relative;
+        height: 100%;
+    }
+
+    .hero-section img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+    }
+
+        .hero-section img.active {
+            opacity: 1;
+        }
+
+    .hero-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+        .hero-overlay h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .hero-overlay .btn {
+            font-size: 1.2rem;
+            padding: 10px 20px;
+        }
+</style>
+
+<!-- JavaScript -->
+<script>
+    let currentImageIndex = 0;
+    const images = document.querySelectorAll('.hero-image');
+    const totalImages = images.length;
+
+    function changeImage() {
+        // Remove 'active' class from the current image
+        images[currentImageIndex].classList.remove('active');
+
+        // Move to the next image
+        currentImageIndex = (currentImageIndex + 1) % totalImages;
+
+        // Add 'active' class to the next image for fading in
+        images[currentImageIndex].classList.add('active');
+    }
+
+    // Initially show the first image
+    images[currentImageIndex].classList.add('active');
+
+    // Change image every 3 seconds
+    setInterval(changeImage, 3000);
+</script>

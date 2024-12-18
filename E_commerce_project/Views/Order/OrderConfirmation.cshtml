@@ -1,0 +1,68 @@
+﻿@model E_commerce_project.Models.Order
+
+<div class="checkout-page soft-pink-theme">
+    <div class="container">
+        <div class="row">
+            <!-- Order Confirmation Section -->
+            <div class="col-md-12">
+                <h2 class="text-pink text-center mt-3">Order Confirmation</h2>
+
+                <p class="text-pink text-center">Thank you for your order!</p>
+                <div class="order-summary">
+                    <p class="text-pink">Order Number: <strong>@Model.Id</strong></p>
+                    <p class="text-pink">Order Date: <strong>@Model.OrderDate:dd/MM/yyyy</strong></p>
+                    <p class="text-pink">Total Amount: <strong>@Model.TotalAmount.ToString("C")</strong></p>
+                    <p class="text-pink">Shipping Address: <strong>@Model.ShippingAddress</strong></p>
+                </div>
+
+                <!-- Button to Continue Shopping -->
+                <div class="text-center mt-4">
+                    <a href="@Url.Action("Index", "Cosmetics")" class="btn btn-danger btn-lg">Continue Shopping</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* General Page Styling */
+    .checkout-page {
+        padding: 30px 0;
+        min-height: 100vh;
+        background-color: #fde8f1; /* Soft pink background */
+    }
+
+        /* Heading Styling */
+        .checkout-page h2 {
+            font-weight: bold;
+            color: #d685ad; /* Muted pink */
+            text-transform: uppercase;
+        }
+
+    /* Order Summary Styling */
+    .order-summary p {
+        font-size: 1.2rem;
+        color: #d685ad;
+    }
+
+    /* Button Styling */
+    .btn-danger {
+        background-color: #d9534f;
+        border-color: #d9534f;
+    }
+
+        .btn-danger:hover {
+            background-color: #c9302c;
+            border-color: #c12e2a;
+        }
+
+    .btn-pink {
+        background-color: #f7c9d5;
+        border-color: #f7c9d5;
+    }
+
+        .btn-pink:hover {
+            background-color: #f7a7b7;
+            border-color: #f7a7b7;
+        }
+</style>

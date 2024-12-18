@@ -1,0 +1,113 @@
+﻿@model E_commerce_project.Models.OrderVM
+
+<div class="checkout-page soft-pink-theme">
+    <div class="container">
+        <div class="row">
+            <!-- Checkout Form Section -->
+            <div class="col-md-12">
+                <h2 class="text-pink text-center mt-3">Checkout</h2>
+
+                <form asp-action="PlaceOrder" method="post">
+                    <div>
+                        <h4 class="text-pink">Shipping Address</h4>
+                        <textarea name="shippingAddress" rows="4" required class="form-control"></textarea>
+                    </div>
+
+                    <h4 class="text-pink mt-4">Order Summary</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.CartItems)
+                            {
+                                <tr>
+                                    <td>@item.Product.Name</td>
+                                    <td>@item.Product.Price €</td>
+                                    <td>@item.Quantity</td>
+                                    <td>@(item.Product.Price * item.Quantity) €</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                    <h4 class="text-pink">Total: @Model.TotalAmount €</h4>
+
+                    <!-- Buttons Section -->
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-pink btn-lg">Place Order</button>
+                    </div>
+                </form>
+
+                <!-- Button to Continue Shopping -->
+                <div class="text-center mt-4">
+                    <a href="@Url.Action("Index", "Cosmetics")" class="btn btn-danger btn-lg">Continue Shopping</a>
+                </div>
+
+                <!-- Button to Go to Shopping Cart -->
+                <div class="text-center mt-3">
+                    <a href="@Url.Action("Index", "Cart")" class="btn btn-pink btn-lg">Your Shopping Cart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* General Page Styling */
+    .checkout-page {
+        padding: 30px 0;
+        min-height: 100vh;
+        background-color: #fde8f1; /* Soft pink background */
+    }
+
+        /* Heading Styling */
+        .checkout-page h2 {
+            font-weight: bold;
+            color: #d685ad; /* Muted pink */
+            text-transform: uppercase;
+        }
+
+    /* Table Styling */
+    .table {
+        background-color: #fffafc; /* Light pinkish white for rows */
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+        .table th {
+            background-color: #d685ad; /* Muted pink header */
+            color: white;
+            border: none;
+        }
+
+    .table-hover tbody tr:hover {
+        background-color: #fde8f1; /* Highlight on hover */
+    }
+
+    /* Button Styling */
+    .btn-danger {
+        background-color: #d9534f;
+        border-color: #d9534f;
+    }
+
+        .btn-danger:hover {
+            background-color: #c9302c;
+            border-color: #c12e2a;
+        }
+
+    .btn-pink {
+        background-color: #f7c9d5;
+        border-color: #f7c9d5;
+    }
+
+        .btn-pink:hover {
+            background-color: #f7a7b7;
+            border-color: #f7a7b7;
+        }
+</style>

@@ -1,0 +1,155 @@
+﻿@model IEnumerable<E_commerce_project.Models.CartItem>
+
+<div class="shopping-cart soft-pink-theme">
+    <div class="container">
+        <div class="row">
+            <!-- Image Section -->
+            <div class="col-md-4 text-center">
+                <img src="https://i.pinimg.com/736x/60/2a/74/602a7431b8fe58d15113144521b88bef.jpg"
+                     alt="Shopping Cart Image"
+                     class="cart-image img-fluid rounded"
+                     style="max-width: 200px; height: auto; object-fit: cover; border-radius: 10px;">
+                <h2 class="text-pink mt-3">Your Shopping Cart</h2>
+            </div>
+
+            <!-- Cart Table Section -->
+            <div class="col-md-8">
+                @if (!Model.Any())
+                {
+                    <p class="text-center">Your cart is empty!</p>
+                }
+                else
+                {
+                    <div class="card shadow-lg border-0">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Product.Name</td>
+                                        <td>@item.Product.Price.ToString("C")</td>
+                                        <td>
+                                            <form asp-action="UpdateQuantity" asp-controller="CartItems" method="post" class="d-inline">
+                                                <input type="hidden" name="id" value="@item.Id" />
+                                                <input type="number" name="quantity" value="@item.Quantity" min="1" max="@item.Product.QteStock" class="form-control form-control-sm d-inline w-auto" />
+                                                <button type="submit" class="btn btn-sm btn-outline-primary">Update</button>
+                                            </form>
+                                        </td>
+                                        <td>@item.TotalPrice.ToString("C")</td>
+                                        <td>
+                                            <form asp-action="RemoveFromCart" asp-controller="CartItems" method="post" class="d-inline">
+                                                <input type="hidden" name="id" value="@item.Id" />
+                                                <button type="submit" class="btn btn-sm btn-outline-danger">Remove</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                        <div class="cart-summary p-3">
+                            <p class="text-end">
+                                <strong>Total:</strong>
+                                <span class="text-success">@Model.Sum(item => item.TotalPrice).ToString("C")</span>
+                            </p>
+                            <div class="text-end">
+                                <a href="@Url.Action("Checkout", "Order")" class="btn btn-danger">Proceed to Checkout</a>
+                                <a href="@Url.Action("Index", "Cosmetics")" class="btn btn-secondary">Continue Shopping</a>
+                                <a href="@Url.Action("Index", "Order")" class="btn btn-outline-pink">See Your Orders</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* General Page Styling */
+    .shopping-cart {
+        padding: 30px 0;
+        min-height: 100vh;
+        background-color: #fde8f1; /* Soft pink background */
+    }
+
+        /* Heading Styling */
+        .shopping-cart h2 {
+            font-weight: bold;
+            color: #d685ad; /* Muted pink */
+            text-transform: uppercase;
+        }
+
+    /* Table Styling */
+    .table {
+        background-color: #fffafc; /* Light pinkish white for rows */
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+        .table th {
+            background-color: #d685ad; /* Muted pink header */
+            color: white;
+            border: none;
+        }
+
+    .table-hover tbody tr:hover {
+        background-color: #fde8f1; /* Highlight on hover */
+    }
+
+    /* Button Styling */
+    .btn-outline-danger {
+        color: #d9534f;
+        border-color: #d9534f;
+    }
+
+        .btn-outline-danger:hover {
+            background-color: #d9534f;
+            color: white;
+        }
+
+    .btn-outline-primary {
+        color: #007bff;
+        border-color: #007bff;
+    }
+
+        .btn-outline-primary:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+    .btn-outline-pink {
+        color: #d685ad;
+        border: 1px solid #d685ad;
+    }
+
+        .btn-outline-pink:hover {
+            background-color: #d685ad;
+            color: white;
+        }
+
+    /* Cart Summary */
+    .cart-summary {
+        background-color: #fffafc; /* Light pinkish white */
+        border-top: 2px solid #d685ad; /* Pink border on top */
+        border-radius: 0 0 12px 12px;
+    }
+
+        .cart-summary strong {
+            color: #6d4c5a; /* Subtle brownish pink */
+        }
+
+        .cart-summary .text-success {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+</style>

@@ -1,0 +1,123 @@
+﻿@model IEnumerable<E_commerce_project.Models.Order>
+
+<div class="orders-list soft-pink-theme">
+    <div class="container">
+        <div class="row">
+            <!-- Orders List Section -->
+            <div class="col-md-12 text-center">
+                <h2 class="text-pink mt-3">My Orders</h2>
+                @if (!Model.Any())
+                {
+                    <p class="text-center display-4 text-muted">You have no orders yet!</p>
+                    <!-- Button to Continue Shopping -->
+                    <a href="@Url.Action("Index", "Cosmetics")" class="btn btn-danger btn-lg mt-3">Continue Shopping</a>
+                    <!-- Button to Go to Shopping Cart -->
+                    <a href="@Url.Action("Index", "CartItems")" class="btn btn-pink btn-lg mt-3 ms-3">Your Shopping Cart</a>
+                }
+                else
+                {
+                    <div class="card shadow-lg border-0">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Order Number</th>
+                                    <th>Order Date</th>
+                                    <th>Total Amount</th>
+                                    <th>Status</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var order in Model)
+                                {
+                                    <tr>
+                                        <td>@order.Id</td>
+                                        <td>@order.OrderDate.ToString("dd/MM/yyyy")</td>
+                                        <td>@order.TotalAmount.ToString("C")</td>
+                                        <td>@order.Status</td>
+                                        <td>
+                                            <a asp-action="OrderConfirmation" asp-route-orderId="@order.Id" class="btn btn-outline-pink btn-sm">View Details</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* General Page Styling */
+    .orders-list {
+        padding: 30px 0;
+        min-height: 100vh;
+        background-color: #fde8f1; /* Soft pink background */
+    }
+
+        /* Heading Styling */
+        .orders-list h2 {
+            font-weight: bold;
+            color: #d685ad; /* Muted pink */
+            text-transform: uppercase;
+        }
+
+        /* Text Styling for "No Orders" */
+        .orders-list .display-4 {
+            font-size: 3rem;
+            color: #d685ad;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+    /* Button Styling */
+    .btn-danger {
+        background-color: #d9534f;
+        border-color: #d9534f;
+    }
+
+        .btn-danger:hover {
+            background-color: #c9302c;
+            border-color: #c12e2a;
+        }
+
+    .btn-pink {
+        background-color: #f7c9d5;
+        border-color: #f7c9d5;
+    }
+
+        .btn-pink:hover {
+            background-color: #f7a7b7;
+            border-color: #f7a7b7;
+        }
+
+    /* Table Styling */
+    .table {
+        background-color: #fffafc; /* Light pinkish white for rows */
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+        .table th {
+            background-color: #d685ad; /* Muted pink header */
+            color: white;
+            border: none;
+        }
+
+    .table-hover tbody tr:hover {
+        background-color: #fde8f1; /* Highlight on hover */
+    }
+
+    /* Button Styling */
+    .btn-outline-pink {
+        color: #d685ad;
+        border: 1px solid #d685ad;
+    }
+
+        .btn-outline-pink:hover {
+            background-color: #d685ad;
+            color: white;
+        }
+</style>
